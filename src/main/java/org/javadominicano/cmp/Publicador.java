@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Publicador {
 
-    public static final String BROKER_URL = "tcp://test.mosquitto.org:1883";
+    private static final String BROKER_URL = "tcp://test.mosquitto.org:1883";
     private MqttClient client;
 
     public Publicador(String id){
@@ -49,13 +49,13 @@ public class Publicador {
         
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void iniciarPrueba() throws Exception {
         Thread hilo1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(true) {
                     Gson gson = new Gson();
-                    new Publicador("sensora").enviarMensaje("/casa/cocina/sensora/temp", gson.toJson(new Sensor("sensora")));
+                    new Publicador("sensora").enviarMensaje("/casa/cocina/sensora/temp-humedad", gson.toJson(new Sensor("sensora")));
 
                     try {
                         Thread.sleep(1000);
@@ -72,7 +72,7 @@ public class Publicador {
             public void run() {
                 while(true) {
                     Gson gson = new Gson();
-                    new Publicador("sensorb").enviarMensaje("/casa/sala/sensorb/temp", gson.toJson(new Sensor("sensorb")));
+                    new Publicador("sensorb").enviarMensaje("/casa/sala/sensorb/temp-humedad", gson.toJson(new Sensor("sensorb")));
 
                     try {
                         Thread.sleep(5000);

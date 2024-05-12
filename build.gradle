@@ -1,18 +1,39 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group 'org.javadominicano'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+mainClassName='org.javadominicano.cmp.Main'
+
+java {
+    sourceCompatibility = '21'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile "org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0"
-    compile 'com.google.code.gson:gson:2.8.4'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation "org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5"
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+/**
+ * Para permitir utilizar la entrada estándar en Gradle
+ */
+run {
+    standardInput = System.in
+}
+
+shadowJar {
+    archiveBaseName.set('prueba-mqtt')
+    archiveClassifier.set('')
+    archiveVersion.set('')
 }

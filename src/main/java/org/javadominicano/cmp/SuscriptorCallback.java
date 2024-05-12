@@ -13,7 +13,9 @@ public class SuscriptorCallback implements MqttCallback {
 
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        System.out.println(String.format("Topic: %s - Mensaje Recibido: %s", topic, message.toString()));
+        System.out.println(String.format("--------------- Mensaje Recibido [%s] -----------------", topic));
+        System.out.println(String.format("Mensaje Recibido: %s", message.toString()));
+        System.out.println(String.format("--------------- Fin Mensaje Recibido [%s] -----------------", topic));
     }
 
     @Override
